@@ -24,9 +24,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/placeholder_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/lighter_gray">
 
     <View
         android:layout_width="match_parent"
@@ -46,10 +46,11 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="18dp"
+        android:contentDescription="@string/map"
         app:srcCompat="@drawable/gmap" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/noteTitle"
         android:layout_width="256dp"
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
