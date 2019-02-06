@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <at.markushi.ui.CircleButton
+        android:id="@+id/newTask"
+        android:layout_width="80dp"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="312dp"
+        android:layout_marginLeft="312dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="23dp"
+        android:src="@drawable/ic_action_tick"
+        app:cb_color="#99CC00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="151dp" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
@@ -14,23 +32,5 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp" />
-
-    <at.markushi.ui.CircleButton
-        android:id="@+id/newTask"
-        android:layout_width="65sp"
-        android:layout_height="65sp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="315dp"
-        android:layout_marginLeft="315dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="0dp"
-        android:src="@drawable/ic_action_tick"
-        app:cb_color="#99CC00"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="151dp" />
 
 </android.widget.RelativeLayout>
