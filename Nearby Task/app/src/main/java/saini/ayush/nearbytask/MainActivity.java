@@ -3,15 +3,13 @@ package saini.ayush.nearbytask;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.willowtreeapps.spruce.Spruce;
 import com.willowtreeapps.spruce.animation.DefaultAnimations;
@@ -20,34 +18,40 @@ import com.willowtreeapps.spruce.sort.DefaultSort;
 import java.util.ArrayList;
 import java.util.List;
 
-import saini.ayush.nearbytask.model.ExampleData;
+import saini.ayush.nearbytask.model.DatabaseHelper;
+import saini.ayush.nearbytask.model.Task;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Animator spruceAnimator;
+    private TasksAdapter mAdapter;
+    private List<Task> tasksList = new ArrayList<>();
+    private TextView noTaskView;
 
+    private DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this) {
+        noTaskView = findViewById(R.id.noTask);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext()) {
             @Override
             public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
                 super.onLayoutChildren(recycler, state);
                 initSpruce();
             }
         };
+        db = new DatabaseHelper(this);
 
-        // Mock data objects
-        List<ExampleData> placeHolderList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            placeHolderList.add(new ExampleData());
-        }
+        tasksList.addAll(db.getAllTasks());
+        mAdapter = new TasksAdapter(this, tasksList);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(mAdapter);
 
-        recyclerView.setAdapter(new RecyclerAdapter(placeHolderList));
-        recyclerView.setLayoutManager(linearLayoutManager);
+        toggleEmptyNotes();
+
 
 
     }
@@ -58,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
             spruceAnimator.start();
         }
     }
+
+
     private void initSpruce() {
         spruceAnimator = new Spruce.SpruceBuilder(recyclerView)
                 .sortWith(new DefaultSort(100))
@@ -65,48 +71,21 @@ public class MainActivity extends AppCompatActivity {
                         ObjectAnimator.ofFloat(recyclerView, "translationX", -recyclerView.getWidth(), 0f).setDuration(800))
                 .start();
     }
-    private class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-        List<ExampleData> placeholderList;
-
-        class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-            RelativeLayout placeholderView;
-
-            ViewHolder(View itemView) {
-                super(itemView);
-                placeholderView = (RelativeLayout) itemView.findViewById(R.id.placeholder_view);
-                placeholderView.setOnClickListener(this);
-            }
-
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"ABC",Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        RecyclerAdapter(List<ExampleData> placeholderList) {
-            this.placeholderList = placeholderList;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            RelativeLayout view = (RelativeLayout) LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.view_placeholder, parent, false);
-
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return placeholderList.size();
-        }
-
+    public void NewTask(View view){
+        Intent intent = new Intent(MainActivity.this,NewtaskActivity.class);
+        startActivity(intent);
     }
+
+    private void toggleEmptyNotes() {
+        // you can check notesList.size() > 0
+
+        if (db.getTasksCount() > 0) {
+            noTaskView.setVisibility(View.GONE);
+        } else {
+            noTaskView.setVisibility(View.VISIBLE);
+        }
+    }
+
 }
 
