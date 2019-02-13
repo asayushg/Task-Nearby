@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TasksAdapter mAdapter;
     private List<Task> tasksList = new ArrayList<>();
     private TextView noTaskView;
+    private static final String tag = "MyActivity";
 
     private DatabaseHelper db;
     @Override
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
 
         tasksList.addAll(db.getAllTasks());
+        Log.d(tag, String.valueOf(tasksList));
         mAdapter = new TasksAdapter(this, tasksList);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
