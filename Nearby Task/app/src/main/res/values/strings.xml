@@ -7,8 +7,9 @@
     <string name="save">Save</string>
     <string name="new_task">New Task</string>
     <string name="backbutton">BackButton</string>
-    <string name="type_here">Type here.</string>
+    <string name="type_here">Task Description</string>
     <string name="task">Task</string>
     <string name="date">Date</string>
     <string name="feb_12">FEB 12</string>
+    <string name="title">Enter Title For Task</string>
 </resources>

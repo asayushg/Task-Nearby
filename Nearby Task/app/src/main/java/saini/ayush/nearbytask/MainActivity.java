@@ -8,10 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
 import com.willowtreeapps.spruce.Spruce;
 import com.willowtreeapps.spruce.animation.DefaultAnimations;
 import com.willowtreeapps.spruce.sort.DefaultSort;
@@ -21,14 +19,15 @@ import java.util.List;
 
 import saini.ayush.nearbytask.model.DatabaseHelper;
 import saini.ayush.nearbytask.model.Task;
+import saini.ayush.nearbytask.model.TaskAdapter;
+
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Animator spruceAnimator;
-    private TasksAdapter mAdapter;
-    private List<Task> tasksList = new ArrayList<>();
     private TextView noTaskView;
-    private static final String tag = "MyActivity";
+    private TaskAdapter mAdapter;
+    private List<Task> tasksList = new ArrayList<>();
 
     private DatabaseHelper db;
     @Override
@@ -46,16 +45,13 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         db = new DatabaseHelper(this);
-
         tasksList.addAll(db.getAllTasks());
-        Log.d(tag, String.valueOf(tasksList));
-        mAdapter = new TasksAdapter(this, tasksList);
+        mAdapter = new TaskAdapter(this, tasksList);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
 
-        toggleEmptyNotes();
 
-
+        Empty();
 
     }
     @Override
@@ -80,14 +76,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void toggleEmptyNotes() {
-        // you can check notesList.size() > 0
-
-        if (db.getTasksCount() > 0) {
-            noTaskView.setVisibility(View.GONE);
-        } else {
-            noTaskView.setVisibility(View.VISIBLE);
-        }
+    public void Empty(){
+        int count = db.getTasksCount();
+        if(count>0)noTaskView.setVisibility(View.INVISIBLE);
+        else noTaskView.setVisibility(View.VISIBLE);
     }
 
 }

@@ -13,6 +13,20 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="75dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="@string/title"
+        android:inputType="textPersonName"
+        android:autofillHints="" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="120dp"
@@ -48,11 +62,11 @@
     <MultiAutoCompleteTextView
         android:id="@+id/taskdetail"
         android:layout_width="369dp"
-        android:layout_height="53dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="58dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="151dp"
         android:autoLink="web|email|phone|map"
         android:background="@null"
         android:hint="@string/type_here" />

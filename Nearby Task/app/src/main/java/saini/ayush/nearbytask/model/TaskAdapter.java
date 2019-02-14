@@ -1,4 +1,5 @@
-package saini.ayush.nearbytask;
+package saini.ayush.nearbytask.model;
+
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,35 +14,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import saini.ayush.nearbytask.model.Task;
+import saini.ayush.nearbytask.R;
 
-
-public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder> {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> {
 
     private Context context;
     private List<Task> notesList;
     RelativeLayout placeholderView;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
-        public TextView task;
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView taskTitle;
         public TextView timestamp;
 
         public MyViewHolder(View view) {
             super(view);
-            placeholderView = (RelativeLayout) view.findViewById(R.id.placeholder_view);
-            placeholderView.setOnClickListener(this);
-            task = placeholderView.findViewById(R.id.taskTitle);
+            placeholderView = view.findViewById(R.id.placeholder_view);
+            taskTitle = placeholderView.findViewById(R.id.taskTitle);
             timestamp = placeholderView.findViewById(R.id.timestamp);
         }
 
-        @Override
-        public void onClick(View v) {
-
-        }
     }
 
 
-    public TasksAdapter(Context context, List<Task> notesList) {
+    public TaskAdapter(Context context, List<Task> notesList) {
         this.context = context;
         this.notesList = notesList;
     }
@@ -57,7 +52,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Task task = notesList.get(position);
-        holder.task.setText(task.getTask());
+        holder.taskTitle.setText(task.getTitle()+"\n"+task.getTask());
         // Formatting and displaying timestamp
         holder.timestamp.setText(formatDate(task.getTimestamp()));
     }
