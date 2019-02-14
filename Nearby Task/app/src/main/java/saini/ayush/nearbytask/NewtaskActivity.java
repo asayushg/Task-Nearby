@@ -16,7 +16,7 @@ import saini.ayush.nearbytask.model.Task;
 
 public class NewtaskActivity extends AppCompatActivity {
     private DatabaseHelper db;
-    private TasksAdapter mAdapter;
+    //private TasksAdapter mAdapter;
     private List<Task> tasksList = new ArrayList<>();
     private EditText newNote;
     private  String string;
@@ -24,13 +24,14 @@ public class NewtaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newtask);
-        db = new DatabaseHelper(this);
+
         newNote = (EditText) findViewById(R.id.taskdetail);
     }
 
     public void BackButton(View view){
-        Intent intent = new Intent(NewtaskActivity.this,MainActivity.class);
-        startActivity(intent);
+        super.onBackPressed ();
+        //Intent intent = new Intent(NewtaskActivity.this,MainActivity.class);
+        //startActivity(intent);
     }
 
     public void saveTask(View view){
@@ -41,6 +42,7 @@ public class NewtaskActivity extends AppCompatActivity {
     private void createTask(String task) {
         // inserting note in db and getting
         // newly inserted note id
+        db = new DatabaseHelper(this);
         long id = db.insertTask(task);
 
         // get the newly inserted note from db
@@ -51,8 +53,9 @@ public class NewtaskActivity extends AppCompatActivity {
             tasksList.add(0, n);
 
             // refreshing the list
-            mAdapter.notifyDataSetChanged();
+            //mAdapter.notifyDataSetChanged();
         }
+        db.close ();
     }
 
 }

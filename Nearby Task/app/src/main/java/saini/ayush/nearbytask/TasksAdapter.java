@@ -1,6 +1,7 @@
 package saini.ayush.nearbytask;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,16 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
         @Override
         public void onClick(View v) {
 
+            //Opening Detailed View of task and Edit
+            Intent intent = new Intent(context,TaskDetailActivity.class);
+
+
+            //code to send clicked item data (like database_task_id(only) or all data)
+            //intent.putExtra();
+
+
+
+            context.startActivity (intent);
         }
     }
 

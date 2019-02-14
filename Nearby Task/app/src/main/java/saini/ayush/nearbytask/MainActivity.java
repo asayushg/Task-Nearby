@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         if (spruceAnimator != null) {
             spruceAnimator.start();
         }
+        tasksList.clear ();
+        tasksList.addAll(db.getAllTasks());
+        mAdapter.notifyDataSetChanged ();
     }
 
 
