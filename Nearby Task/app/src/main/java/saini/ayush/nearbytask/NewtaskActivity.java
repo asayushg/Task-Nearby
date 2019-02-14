@@ -26,8 +26,9 @@ public class NewtaskActivity extends AppCompatActivity {
     }
 
     public void BackButton(View view){
-        Intent intent = new Intent(NewtaskActivity.this,MainActivity.class);
-        startActivity(intent);
+        super.onBackPressed ();
+        //Intent intent = new Intent(NewtaskActivity.this,MainActivity.class);
+        //startActivity(intent);
     }
 
     public void saveTask(View view){

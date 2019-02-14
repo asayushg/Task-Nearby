@@ -2,6 +2,7 @@ package saini.ayush.nearbytask.model;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import saini.ayush.nearbytask.R;
+import saini.ayush.nearbytask.TaskDetailActivity;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> {
 
@@ -22,7 +24,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
     private List<Task> notesList;
     RelativeLayout placeholderView;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView taskTitle;
         public TextView timestamp;
 
@@ -31,6 +33,20 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
             placeholderView = view.findViewById(R.id.placeholder_view);
             taskTitle = placeholderView.findViewById(R.id.taskTitle);
             timestamp = placeholderView.findViewById(R.id.timestamp);
+        }
+        @Override
+        public void onClick(View v) {
+
+            //Opening Detailed View of task and Edit
+            Intent intent = new Intent(context,TaskDetailActivity.class);
+
+
+            //code to send clicked item data (like database_task_id(only) or all data)
+            //intent.putExtra();
+
+
+
+            context.startActivity (intent);
         }
 
     }
