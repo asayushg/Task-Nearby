@@ -16,9 +16,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="516dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/view"
-        android:layout_alignBottom="@+id/noTask"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
@@ -27,16 +26,15 @@
 
     <at.markushi.ui.CircleButton
         android:id="@+id/newTask"
-        android:layout_width="80dp"
-        android:layout_height="65dp"
+        android:layout_width="65sp"
+        android:layout_height="65sp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="315dp"
-        android:layout_marginLeft="315dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginStart="300sp"
+        android:layout_marginEnd="10sp"
+        android:layout_marginBottom="10sp"
         android:onClick="NewTask"
         android:src="@drawable/ic_action_tick"
         app:cb_color="#99CC00"
@@ -66,15 +64,13 @@
 
     <TextView
         android:id="@+id/noTask"
-        android:layout_width="152dp"
-        android:layout_height="85dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="110dp"
-        android:layout_marginBottom="49dp"
-        android:text="No Tasks To Show "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="No Tasks"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textSize="20sp" />
 
 
 </android.widget.RelativeLayout>

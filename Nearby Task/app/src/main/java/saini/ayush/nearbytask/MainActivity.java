@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         tasksList.clear ();
         tasksList.addAll(db.getAllTasks());
         mAdapter.notifyDataSetChanged ();
+        Empty ();
     }
 
 
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Empty(){
-        int count = db.getTasksCount();
+        int count = tasksList.size();
         if(count>0)noTaskView.setVisibility(View.INVISIBLE);
         else noTaskView.setVisibility(View.VISIBLE);
     }

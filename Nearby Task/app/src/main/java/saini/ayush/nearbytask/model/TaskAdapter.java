@@ -31,6 +31,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
         public MyViewHolder(View view) {
             super(view);
             placeholderView = view.findViewById(R.id.placeholder_view);
+            placeholderView.setOnClickListener (this);
             taskTitle = placeholderView.findViewById(R.id.taskTitle);
             timestamp = placeholderView.findViewById(R.id.timestamp);
         }
@@ -40,11 +41,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
             //Opening Detailed View of task and Edit
             Intent intent = new Intent(context,TaskDetailActivity.class);
 
-
             //code to send clicked item data (like database_task_id(only) or all data)
             //intent.putExtra();
-
-
 
             context.startActivity (intent);
         }
@@ -59,8 +57,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view =LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_placeholder, parent, false);
+        View view =LayoutInflater.from(parent.getContext()).inflate(R.layout.view_placeholder, parent, false);
 
         return new MyViewHolder(view);
     }
