@@ -26,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table "+ TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,TITLE TEXT,TASK TEXT,DATE DATETIME DEFAULT CURRENT_TIMESTAMP) ");
+        db.execSQL("create table "+ TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,TITLE TEXT,TASK TEXT,DATE DATETIME DEFAULT CURRENT_TIMESTAMP()) ");
     }
 
     @Override
@@ -67,15 +67,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return tasks;
-    }
-
-    public int getTasksCount() {
-        //String countQuery = "SELECT  COUNT(*) FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getReadableDatabase();
-        //Cursor cursor = db.rawQuery(countQuery, null);
-        int count = (int) DatabaseUtils.queryNumEntries(db, TABLE_NAME);//cursor.getInt (cursor.getColumnIndex ("COUNT(*)"));
-        //cursor.close();
-        return count;
     }
 
     public void deleteTask(Task task) {

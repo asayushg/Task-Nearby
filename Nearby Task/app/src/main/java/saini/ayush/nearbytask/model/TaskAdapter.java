@@ -24,27 +24,15 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
     private List<Task> notesList;
     RelativeLayout placeholderView;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder  {
         public TextView taskTitle;
         public TextView timestamp;
 
         public MyViewHolder(View view) {
             super(view);
             placeholderView = view.findViewById(R.id.placeholder_view);
-            placeholderView.setOnClickListener (this);
             taskTitle = placeholderView.findViewById(R.id.taskTitle);
             timestamp = placeholderView.findViewById(R.id.timestamp);
-        }
-        @Override
-        public void onClick(View v) {
-
-            //Opening Detailed View of task and Edit
-            Intent intent = new Intent(context,TaskDetailActivity.class);
-
-            //code to send clicked item data (like database_task_id(only) or all data)
-            //intent.putExtra();
-
-            context.startActivity (intent);
         }
 
     }
@@ -82,10 +70,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
      */
     private String formatDate(String dateStr) {
         try {
+
             SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = fmt.parse(dateStr);
-            SimpleDateFormat fmtOut = new SimpleDateFormat("MMM d");
+            SimpleDateFormat fmtOut = new SimpleDateFormat("MMM d\n HH:mm");
             return fmtOut.format(date);
+
         } catch (ParseException e) {
 
         }

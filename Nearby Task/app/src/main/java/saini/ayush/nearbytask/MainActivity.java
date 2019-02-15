@@ -64,7 +64,13 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                
+                //Opening Detailed View of task and Edit
+                Intent intent = new Intent(MainActivity.this,TaskDetailActivity.class);
+
+                //code to send clicked item data (like database_task_id(only) or all data)
+                //intent.putExtra();
+
+                MainActivity.this.startActivity (intent);
             }
 
             @Override
