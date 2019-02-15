@@ -32,5 +32,10 @@ public class TaskDetailActivity extends AppCompatActivity {
         edit.setText ("EDIT");
         taskcontent.setEnabled (false);
         taskhead.setEnabled (false);
+        //update database
+
+
+        //do database related code above this
+        super.onBackPressed ();
     }
 }
