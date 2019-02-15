@@ -24,13 +24,6 @@ public class NewtaskActivity extends AppCompatActivity {
         newTask = (EditText) findViewById(R.id.taskdetail);
         titleView = (EditText) findViewById(R.id.title);
     }
-
-    public void BackButton(View view){
-        super.onBackPressed ();
-        //Intent intent = new Intent(NewtaskActivity.this,MainActivity.class);
-        //startActivity(intent);
-    }
-
     public void saveTask(View view){
         Title= titleView.getText().toString();
         Task = newTask.getText().toString();

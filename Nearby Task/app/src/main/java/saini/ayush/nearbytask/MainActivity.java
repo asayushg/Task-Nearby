@@ -3,13 +3,19 @@ package saini.ayush.nearbytask;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.willowtreeapps.spruce.Spruce;
 import com.willowtreeapps.spruce.animation.DefaultAnimations;
 import com.willowtreeapps.spruce.sort.DefaultSort;
@@ -28,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView noTaskView;
     private TaskAdapter mAdapter;
     private List<Task> tasksList = new ArrayList<>();
+    private int pos;
 
     private DatabaseHelper db;
     @Override
@@ -53,6 +60,37 @@ public class MainActivity extends AppCompatActivity {
 
         Empty();
 
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this,
+                recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, final int position) {
+                
+            }
+
+            @Override
+            public void onLongClick(View view, final int position) {
+                pos=position;
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                    alertDialogBuilder.setMessage("Delete Task?");
+                            alertDialogBuilder.setPositiveButton("Delete",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface arg0, int arg1) {
+                                            deleteTask(position);
+                                        }
+                                    });
+
+                    alertDialogBuilder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                    }
+        }));
+
     }
     @Override
     public void onResume() {
@@ -77,6 +115,17 @@ public class MainActivity extends AppCompatActivity {
     public void NewTask(View view){
         Intent intent = new Intent(MainActivity.this,NewtaskActivity.class);
         startActivity(intent);
+    }
+
+    private void deleteTask(int position) {
+        // deleting the note from db
+        db.deleteTask(tasksList.get(position));
+
+        // removing the note from the list
+        tasksList.remove(position);
+        mAdapter.notifyItemRemoved(position);
+
+        Empty();
     }
 
     public void Empty(){

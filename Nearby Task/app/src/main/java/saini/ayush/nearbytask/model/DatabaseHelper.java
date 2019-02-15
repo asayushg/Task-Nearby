@@ -77,4 +77,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return count;
     }
+
+    public void deleteTask(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, id + " = ?",
+                new String[]{String.valueOf(task.getId())});
+        db.close();
+    }
 }
