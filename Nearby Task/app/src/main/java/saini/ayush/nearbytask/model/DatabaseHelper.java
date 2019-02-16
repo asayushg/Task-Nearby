@@ -39,6 +39,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(" DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(db);
     }
+
+
+
+
+    // INSERT DNEW TASK IN DATABASE -->
+
+
+
+
     public boolean insertData(String Title, String Task ){
         SQLiteDatabase db= getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -55,6 +64,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return true;
     }
+
+
+
+    // GET ALL TASK DATA -->
+
+
 
     public List<Task> getAllTasks(){
         List<Task> tasks = new ArrayList<>();
@@ -77,6 +92,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return tasks;
     }
+
+
+
+
+    //// GET ALL DATA ABOUT SINGLE TASK -->
+
+
+    public Task getTask(int _id){
+        Task task = new Task();
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE "+id+" = "+_id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.moveToFirst ()){
+            task.setId(cursor.getInt(cursor.getColumnIndex(id)));
+            task.setTitle(cursor.getString(cursor.getColumnIndex(this.title)));
+            task.setTask(cursor.getString(cursor.getColumnIndex(this.task)));
+            task.setTimestamp(cursor.getString(cursor.getColumnIndex(this.date)));
+        }else{
+            Toast.makeText (context,"Error",Toast.LENGTH_SHORT).show();
+        }
+
+        return task;
+    }
+
+
+
+    // UPDATE TASK -->
+
+
+
+    public void updateTask(int _id, String title, String task, String date){
+        ContentValues cv = new ContentValues();
+        cv.put(this.id,_id); //These Fields should be your String values of actual column names
+        cv.put(this.title,title);
+        cv.put(this.task,task);
+        cv.put(this.date,date);
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update (TABLE_NAME,cv,this.id+" = " + _id,null);
+    }
+
+
+
+    //DELETE TASK -->
+
+
 
     public void deleteTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();

@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,TaskDetailActivity.class);
 
                 //code to send clicked item data (like database_task_id(only) or all data)
-                //intent.putExtra();
+                intent.putExtra("ID",tasksList.get (position).getId ());
 
                 MainActivity.this.startActivity (intent);
             }
