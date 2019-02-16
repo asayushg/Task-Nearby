@@ -72,12 +72,12 @@
         android:hint="@string/type_here" />
 
     <com.google.android.gms.maps.MapView
-        android:id="@+id/map"
+        android:id="@+id/mapView"
         android:layout_width="343dp"
         android:layout_height="253dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="129dp" />
 
 </android.widget.RelativeLayout>
