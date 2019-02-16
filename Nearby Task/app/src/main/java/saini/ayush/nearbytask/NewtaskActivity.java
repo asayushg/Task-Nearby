@@ -33,14 +33,15 @@ public class NewtaskActivity extends AppCompatActivity {
         boolean isInserted = db.insertData(Title,Task);
         if(isInserted) {
             Toast.makeText(this,"Task Added",Toast.LENGTH_SHORT).show();
-
         }
         else Toast.makeText(this,"Failed to add Task",Toast.LENGTH_SHORT).show();
 
         super.onBackPressed ();
     }
-    public void BackButton(){
-        finish();
+
+
+    public void BackButton(View v){
+        super.onBackPressed ();
     }
 
 

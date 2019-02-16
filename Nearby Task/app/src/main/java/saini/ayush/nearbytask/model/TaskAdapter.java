@@ -71,9 +71,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
     private String formatDate(String dateStr) {
         try {
 
-            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date date = fmt.parse(dateStr);
-            SimpleDateFormat fmtOut = new SimpleDateFormat("MMM d\n HH:mm");
+            SimpleDateFormat fmtOut = new SimpleDateFormat("MMM d\nHH:mm");
             return fmtOut.format(date);
 
         } catch (ParseException e) {

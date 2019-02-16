@@ -3,10 +3,8 @@ package saini.ayush.nearbytask;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +19,7 @@ import com.willowtreeapps.spruce.animation.DefaultAnimations;
 import com.willowtreeapps.spruce.sort.DefaultSort;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import saini.ayush.nearbytask.model.DatabaseHelper;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new TaskAdapter(this, tasksList);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
-
+        db.close ();
 
         Empty();
 
@@ -104,9 +103,11 @@ public class MainActivity extends AppCompatActivity {
         if (spruceAnimator != null) {
             spruceAnimator.start();
         }
+        db = new DatabaseHelper(this);
         tasksList.clear ();
         tasksList.addAll(db.getAllTasks());
         mAdapter.notifyDataSetChanged ();
+        db.close ();
         Empty ();
     }
 
@@ -126,11 +127,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void deleteTask(int position) {
         // deleting the note from db
+        db = new DatabaseHelper(this);
         db.deleteTask(tasksList.get(position));
 
         // removing the note from the list
         tasksList.remove(position);
         mAdapter.notifyItemRemoved(position);
+        db.close ();
 
         Empty();
     }
