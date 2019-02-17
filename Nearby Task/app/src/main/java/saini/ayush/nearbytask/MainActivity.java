@@ -1,10 +1,16 @@
 package saini.ayush.nearbytask;
 
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Vibrator;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private TaskAdapter mAdapter;
     private List<Task> tasksList = new ArrayList<>();
     private int pos;
+    private boolean mLocationPermissionGranted = false;
 
     private DatabaseHelper db;
     @Override
@@ -50,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 initSpruce();
             }
         };
+        getLocationPermission();
         db = new DatabaseHelper(this);
         tasksList.addAll(db.getAllTasks());
         mAdapter = new TaskAdapter(this, tasksList);
@@ -58,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         db.close ();
 
         Empty();
+
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this,
                 recyclerView, new RecyclerTouchListener.ClickListener() {
@@ -74,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLongClick(View view, final int position) {
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+// Vibrate for 400 milliseconds
+
                 pos=position;
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                     alertDialogBuilder.setMessage("Delete Task?");
@@ -93,7 +106,9 @@ public class MainActivity extends AppCompatActivity {
 
                     AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
+                v.vibrate(200);
                     }
+
         }));
 
     }
@@ -142,6 +157,28 @@ public class MainActivity extends AppCompatActivity {
         int count = tasksList.size();
         if(count>0)noTaskView.setVisibility(View.INVISIBLE);
         else noTaskView.setVisibility(View.VISIBLE);
+    }
+
+    private void  getLocationPermission(){
+        mLocationPermissionGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+        if(mLocationPermissionGranted) {
+            mLocationPermissionGranted= true;
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 200: {
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mLocationPermissionGranted =true;
+                }
+                else finish();
+            }
+        }
     }
 
 }

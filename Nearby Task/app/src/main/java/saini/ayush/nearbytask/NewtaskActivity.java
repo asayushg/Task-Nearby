@@ -1,6 +1,11 @@
 package saini.ayush.nearbytask;
 
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +28,9 @@ public class NewtaskActivity extends AppCompatActivity implements OnMapReadyCall
     private  String Title;
     private  String Task;
     MapView mapView;
+    protected LocationManager locationManager;
+    private Double lat,lon;
+    //private
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +41,8 @@ public class NewtaskActivity extends AppCompatActivity implements OnMapReadyCall
         mapView = findViewById (R.id.mapView);
 
         initGoogleMap(savedInstanceState);
+
+
     }
 
     public void initGoogleMap(Bundle savedInstanceState){
@@ -82,6 +92,7 @@ public class NewtaskActivity extends AppCompatActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady ( GoogleMap googleMap ) {
+
         LatLng coordinate = new LatLng (26.249819, 78.169722);
         CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 11);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate));
