@@ -4,10 +4,12 @@ package saini.ayush.nearbytask;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +22,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.willowtreeapps.spruce.Spruce;
 import com.willowtreeapps.spruce.animation.DefaultAnimations;
 import com.willowtreeapps.spruce.sort.DefaultSort;
@@ -42,10 +47,13 @@ public class MainActivity extends AppCompatActivity {
     private int pos;
     private boolean mLocationPermissionGranted = false;
 
+
     private DatabaseHelper db;
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getLocationPermission();
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
@@ -57,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 initSpruce();
             }
         };
-        getLocationPermission();
+
+
         db = new DatabaseHelper(this);
         tasksList.addAll(db.getAllTasks());
         mAdapter = new TaskAdapter(this, tasksList);
@@ -106,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
                     AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
-                v.vibrate(200);
+                v.vibrate(50);
                     }
 
         }));
@@ -137,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void NewTask(View view){
         Intent intent = new Intent(MainActivity.this,NewtaskActivity.class);
+        //intent.putExtra("latitude",latitude);
+        //intent.putExtra("longitude",longitude);
         startActivity(intent);
     }
 
