@@ -2,7 +2,6 @@ package saini.ayush.nearbytask.model;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 
 import saini.ayush.nearbytask.R;
-import saini.ayush.nearbytask.TaskDetailActivity;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> {
 

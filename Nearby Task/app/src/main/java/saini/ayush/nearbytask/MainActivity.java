@@ -9,10 +9,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,17 +18,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.willowtreeapps.spruce.Spruce;
 import com.willowtreeapps.spruce.animation.DefaultAnimations;
 import com.willowtreeapps.spruce.sort.DefaultSort;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import saini.ayush.nearbytask.model.DatabaseHelper;
@@ -44,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView noTaskView;
     private TaskAdapter mAdapter;
     private List<Task> tasksList = new ArrayList<>();
-    private int pos;
-    private boolean mLocationPermissionGranted = false;
 
 
     private DatabaseHelper db;
@@ -53,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLocationPermission();
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
@@ -96,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
 // Vibrate for 400 milliseconds
 
-                pos=position;
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                     alertDialogBuilder.setMessage("Delete Task?");
                             alertDialogBuilder.setPositiveButton("Delete",
@@ -170,27 +158,6 @@ public class MainActivity extends AppCompatActivity {
         else noTaskView.setVisibility(View.VISIBLE);
     }
 
-    private void  getLocationPermission(){
-        mLocationPermissionGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-
-        if(mLocationPermissionGranted) {
-            mLocationPermissionGranted= true;
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case 200: {
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mLocationPermissionGranted =true;
-                }
-                else finish();
-            }
-        }
-    }
 
 }
 

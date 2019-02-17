@@ -61,23 +61,24 @@
 
     <MultiAutoCompleteTextView
         android:id="@+id/taskdetail"
-        android:layout_width="369dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="100sp"
+        android:gravity="top"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="151dp"
-        android:autoLink="web|email|phone|map"
+        android:layout_marginEnd="10sp"
         android:background="@null"
         android:hint="@string/type_here" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="253dp"
+        android:layout_height="350sp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
         android:layout_marginBottom="10dp" />
 
 </android.widget.RelativeLayout>

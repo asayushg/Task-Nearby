@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.gms.common.data.DataBufferObserverSet;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
