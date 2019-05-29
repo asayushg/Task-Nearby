@@ -1,6 +1,2 @@
 # Task-Nearby
-Notified when in nerby area.
-
-
-//TODO
-1.Logging system
+Task Nearby is an android app which notifies the user when there is a task in nearby area.
